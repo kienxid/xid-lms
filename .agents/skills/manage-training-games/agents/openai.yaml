@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage Training Games"
+  short_description: "Add, validate, and publish training games"
+  default_prompt: "Use $manage-training-games to add or update a training game, validate it, and publish it safely."
