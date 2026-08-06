@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Divoom E-learning Demos</title>
+<title>Divoom Learning Modules</title>
 <style>
   :root { color-scheme: light dark; }
   * { box-sizing: border-box; }
@@ -12,9 +12,14 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: #0f1116; color: #e8eaf0; padding: 24px;
   }
-  .wrap { width: 100%; max-width: 720px; }
+  .wrap { width: 100%; max-width: 760px; }
   h1 { font-size: 1.5rem; margin: 0 0 4px; }
-  p.sub { margin: 0 0 24px; color: #9aa0ad; font-size: .95rem; }
+  p.sub { margin: 0; color: #9aa0ad; font-size: .95rem; }
+  header { margin-bottom: 28px; }
+  .group + .group { margin-top: 30px; }
+  .group-head { margin-bottom: 12px; }
+  .group-head h2 { margin: 0; font-size: 1.1rem; }
+  .group-head p { margin: 4px 0 0; color: #9aa0ad; font-size: .85rem; }
   a.card {
     display: block; text-decoration: none; color: inherit;
     background: #171a21; border: 1px solid #262b36; border-radius: 12px;
@@ -28,26 +33,66 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Divoom E-learning Demos</h1>
-    <p class="sub">Chọn một bài để mở.</p>
+    <header>
+      <h1>Divoom Learning Modules</h1>
+      <p class="sub">Chọn một hoạt động để bắt đầu.</p>
+    </header>
 
-    <a class="card" href="Divoom_Elearning_Brand_DNA_Tracking_v1/">
-      <div class="t">Brand DNA Tracking</div>
-      <div class="d">Divoom E-learning · Brand DNA · v1</div>
-      <div class="go">Mở bài →</div>
-    </a>
+    <section class="group" aria-labelledby="practice-quiz-heading">
+      <div class="group-head">
+        <h2 id="practice-quiz-heading">Practice Quiz</h2>
+        <p>Ôn tập kiến thức thương hiệu và sản phẩm.</p>
+      </div>
 
-    <a class="card" href="Divoom_Elearning_Lineup_Tracking_v1/">
-      <div class="t">Lineup Tracking</div>
-      <div class="d">Divoom E-learning · Product Lineup · v1</div>
-      <div class="go">Mở bài →</div>
-    </a>
+      <a class="card" href="Divoom_Elearning_Brand_DNA_Tracking_v1/">
+        <div class="t">Brand DNA Tracking</div>
+        <div class="d">Divoom E-learning · Brand DNA · v1</div>
+        <div class="go">Mở bài →</div>
+      </a>
 
-    <a class="card" href="Divoom_Product_Visual_Quiz_v2/">
-      <div class="t">Product Visual Quiz</div>
-      <div class="d">Divoom · Product Visual Quiz · v2</div>
-      <div class="go">Mở bài →</div>
-    </a>
+      <a class="card" href="Divoom_Elearning_Lineup_Tracking_v1/">
+        <div class="t">Lineup Tracking</div>
+        <div class="d">Divoom E-learning · Product Lineup · v1</div>
+        <div class="go">Mở bài →</div>
+      </a>
+
+      <a class="card" href="Divoom_Product_Visual_Quiz_v2/">
+        <div class="t">Product Visual Quiz</div>
+        <div class="d">Divoom · Product Visual Quiz · v2</div>
+        <div class="go">Mở bài →</div>
+      </a>
+    </section>
+
+    <section class="group" aria-labelledby="challenge-zone-heading">
+      <div class="group-head">
+        <h2 id="challenge-zone-heading">Challenge Zone</h2>
+        <p>Thử thách tương tác và ghi nhận kết quả học tập.</p>
+      </div>
+
+      <a class="card" href="pixel-grid-challenge/">
+        <div class="t">Pixel Grid Challenge</div>
+        <div class="d">15 câu hỏi · Mở khóa tranh pixel · Tracking</div>
+        <div class="go">Mở thử thách →</div>
+      </a>
+
+      <a class="card" href="crossword-challenge/">
+        <div class="t">Crossword Challenge</div>
+        <div class="d">Ô chữ thương hiệu · Final Key · Tracking</div>
+        <div class="go">Mở thử thách →</div>
+      </a>
+
+      <a class="card" href="grid-puzzle/">
+        <div class="t">Grid Puzzle</div>
+        <div class="d">Tìm hidden words · Câu hỏi gợi ý · Tracking</div>
+        <div class="go">Mở thử thách →</div>
+      </a>
+
+      <a class="card" href="pixel-maze-mission/">
+        <div class="t">Pixel Maze Mission</div>
+        <div class="d">Mê cung sản phẩm · 5 cửa · Tracking</div>
+        <div class="go">Mở thử thách →</div>
+      </a>
+    </section>
   </div>
 </body>
 </html>
