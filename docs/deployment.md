@@ -17,6 +17,14 @@ To publish a new training game:
 3. Commit and push both changes to `main`.
 4. Confirm the Pages workflow succeeds in GitHub Actions.
 
+## Codex workflow
+
+Open this repository in Codex and describe the change in plain language. Codex automatically follows `AGENTS.md` and the repo-local `manage-training-games` skill.
+
+Include `publish`, `push`, `deploy`, or `đăng lên` only when Codex should commit and push the validated change. For example:
+
+> Thêm folder game này vào trang training, đặt tên “Product Quiz 3”, kiểm tra và đăng lên giúp mình.
+
 ## Custom domain
 
 No custom domain is configured. Google Sites can link directly to the production URL or an individual game URL.
