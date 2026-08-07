@@ -1,6 +1,6 @@
 ---
 name: manage-training-games
-description: Manage the static HTML training-game catalog deployed through GitHub Pages. Use when adding, importing, updating, replacing, renaming, removing, validating, publishing, or troubleshooting a training game; editing the root game catalog; fixing game links or assets; or handling Vietnamese requests such as "thêm game", "sửa trang", "đăng lên", and "publish" in this repository.
+description: Manage the multi-brand static HTML training site deployed through GitHub Pages. Use when adding, importing, updating, replacing, renaming, removing, validating, publishing, or troubleshooting a brand or training game; editing a brand catalog; fixing game links or assets; or handling Vietnamese requests such as "thêm game", "sửa trang", "đăng lên", and "publish" in this repository.
 ---
 
 # Manage Training Games
@@ -9,30 +9,38 @@ Maintain the catalog without requiring the Training team to understand Git, host
 
 ## Site contracts
 
-- Serve production at `https://kienxid.github.io/xid-lms/`.
+- Serve production at `https://elearning.xid.my/` with `https://kienxid.github.io/xid-lms/` as the GitHub Pages fallback.
 - Publish the repository root from the `main` branch.
-- Treat root `index.html` as the catalog.
-- Keep each game self-contained in one top-level folder with an `index.html`.
+- Treat root `index.html` as the brand catalog.
+- Keep each brand in one top-level folder with its own `index.html` game catalog.
+- Keep each game self-contained under its brand folder with an `index.html`.
 - Treat published folder paths as stable URLs used by Google Sites.
 - Assume every committed file becomes public.
 
 ## Workflow
 
-1. Inspect `git status`, root `index.html`, the affected game folder, and `docs/deployment.md`.
-2. Identify whether the request adds a game, updates an existing URL, or intentionally migrates/removes one.
+1. Inspect `git status`, root `index.html`, the affected brand catalog and game folder, and `docs/deployment.md`.
+2. Identify the brand and whether the request adds a game, updates an existing URL, or intentionally migrates/removes one.
 3. Preserve unrelated files and user changes.
 4. Implement the smallest complete change.
 5. Run the validator and `git diff --check`.
 6. Review the final diff and report the affected local and production URLs.
 7. Commit and push only when the user explicitly requests publishing.
 
+## Add a brand
+
+1. Use a short lowercase kebab-case top-level folder unless the user provides a required slug.
+2. Add the brand's `index.html`; it may be a Coming Soon page until games are available.
+3. Add one `brand-link` card to root `index.html`.
+4. Keep the root `CNAME` unchanged.
+
 ## Add a game
 
 1. Inspect the supplied folder or archive before copying it into the repository.
 2. Require one entry file named `index.html`.
-3. Prefer a short lowercase kebab-case folder for new URLs unless the user provides a required slug.
+3. Prefer a short lowercase kebab-case folder under the correct brand for new URLs unless the user provides a required slug.
 4. Keep assets inside the game folder and use relative paths.
-5. Add one card to root `index.html` with the display title, description, and folder link.
+5. Add one `card` link to the brand's `index.html` with the display title, description, and folder link.
 6. Do not commit the source ZIP; `*.zip` is intentionally ignored.
 
 ## Update a game
@@ -46,7 +54,7 @@ Maintain the catalog without requiring the Training team to understand Git, host
 
 - Require explicit user confirmation because existing external links may break.
 - Prefer leaving the old folder with a redirect to the new URL.
-- Update the root catalog and every known internal reference in the same change.
+- Update the brand catalog and every known internal reference in the same change. Update the root catalog only when a brand changes.
 - Never silently delete another game or shared asset.
 
 ## Validate
@@ -81,8 +89,7 @@ Return:
 - What changed.
 - Validation result.
 - Commit hash and deployment result when published.
-- Direct production URL for every affected game.
+- Direct production URL for every affected brand or game.
 - Any unresolved question at the end.
 
 Use `scripts/validate-training-site.py` as the deterministic pre-publish gate.
-

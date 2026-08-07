@@ -27,6 +27,7 @@ class ReferenceParser(HTMLParser):
         super().__init__()
         self.references: set[str] = set()
         self.cards: list[str] = []
+        self.brand_links: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = {key: value or "" for key, value in attrs}
@@ -36,8 +37,12 @@ class ReferenceParser(HTMLParser):
         for candidate in values.get("srcset", "").split(","):
             if candidate.strip():
                 self.references.add(candidate.strip().split()[0])
-        if tag == "a" and "card" in values.get("class", "").split():
-            self.cards.append(values.get("href", ""))
+        if tag == "a":
+            classes = values.get("class", "").split()
+            if "card" in classes:
+                self.cards.append(values.get("href", ""))
+            if "brand-link" in classes:
+                self.brand_links.append(values.get("href", ""))
 
 
 def parse_args() -> argparse.Namespace:
@@ -91,7 +96,7 @@ def changed_published_urls(repo: Path) -> list[str]:
         fields = line.split("\t")
         status = fields[0]
         old_path = fields[1] if len(fields) > 1 else ""
-        if status.startswith(("D", "R")) and re.fullmatch(r"[^/]+/index\.html", old_path):
+        if status.startswith(("D", "R")) and re.fullmatch(r"[^/]+/[^/]+/index\.html", old_path):
             errors.append(f"published URL removed or renamed: {old_path.removesuffix('index.html')}")
     return errors
 
@@ -104,26 +109,55 @@ def validate(repo: Path) -> list[str]:
 
     root_parser = ReferenceParser()
     root_parser.feed(root_index.read_text(encoding="utf-8"))
-    cards = [card for card in root_parser.cards if card]
-    if not cards:
-        errors.append("root index.html has no game cards")
-    if len(cards) != len(set(cards)):
-        errors.append("root index.html contains duplicate game links")
+    brand_links = [link for link in root_parser.brand_links if link]
+    if not brand_links:
+        errors.append("root index.html has no brand cards")
+    if len(brand_links) != len(set(brand_links)):
+        errors.append("root index.html contains duplicate brand links")
 
-    card_directories: set[Path] = set()
-    for card in cards:
-        target, message = local_target(repo, root_index, card)
+    brand_directories: set[Path] = set()
+    for brand_link in brand_links:
+        target, message = local_target(repo, root_index, brand_link)
         if message:
             errors.append(message)
         elif target:
-            card_directories.add(target.parent)
+            brand_directories.add(target.parent)
             if not exact_case_exists(repo, target):
-                errors.append(f"catalog target missing or wrong case: {card}")
+                errors.append(f"brand catalog target missing or wrong case: {brand_link}")
 
     for child in repo.iterdir():
         if child.is_dir() and not child.name.startswith(".") and (child / "index.html").is_file():
-            if child.resolve() not in card_directories:
-                errors.append(f"game folder missing from root catalog: {child.name}/")
+            if child.resolve() not in brand_directories:
+                errors.append(f"brand folder missing from root catalog: {child.name}/")
+
+    for brand_directory in brand_directories:
+        brand_index = brand_directory / "index.html"
+        if not brand_index.is_file():
+            continue
+        brand_parser = ReferenceParser()
+        brand_parser.feed(brand_index.read_text(encoding="utf-8"))
+        game_links = [link for link in brand_parser.cards if link]
+        if len(game_links) != len(set(game_links)):
+            errors.append(f"{brand_directory.name}/index.html contains duplicate game links")
+
+        game_directories: set[Path] = set()
+        for game_link in game_links:
+            target, message = local_target(repo, brand_index, game_link)
+            if message:
+                errors.append(message)
+            elif target:
+                game_directories.add(target.parent)
+                if not exact_case_exists(repo, target):
+                    errors.append(
+                        f"{brand_directory.name}/ catalog target missing or wrong case: {game_link}"
+                    )
+
+        for child in brand_directory.iterdir():
+            if child.is_dir() and not child.name.startswith(".") and (child / "index.html").is_file():
+                if child.resolve() not in game_directories:
+                    errors.append(
+                        f"game folder missing from {brand_directory.name}/ catalog: {child.name}/"
+                    )
 
     for page in repo.rglob("*.html"):
         if ".git" in page.parts or ".agents" in page.parts:
@@ -168,7 +202,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("OK: catalog, game entry points, local assets, public files, and URL stability validated")
+    print("OK: brand catalogs, game entry points, local assets, public files, and URL stability validated")
     return 0
 
 

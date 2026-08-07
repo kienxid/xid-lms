@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divoom Brand Foundation | E-learning Demo V2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700;900&display=swap');
+:root{
+  --bg:#f5f6f8;
+  --surface:#ffffff;
+  --ink:#141822;
+  --muted:#667085;
+  --line:#dde2ea;
+  --dark:#12131a;
+  --orange:#ff6b35;
+  --yellow:#ffb21c;
+  --teal:#00a3a3;
+  --violet:#6f4cff;
+  --green:#1f9d55;
+  --shadow:0 16px 40px rgba(20,24,34,.10);
+  --font-title:'Bebas Neue',Impact,'Arial Narrow',sans-serif;
+  --font-body:'Roboto',Arial,Helvetica,sans-serif;
+  --font-pixel:'Roboto',Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+button{font:inherit}
+.app{min-height:100vh}
+.topbar{
+  position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(14px)
+}
+.top-inner{
+  width:min(1180px,calc(100% - 32px));margin:auto;display:grid;
+  grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:12px 0
+}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800}
+.mark{width:34px;height:34px;border-radius:8px;background:var(--dark);color:#fff;display:grid;place-items:center;font-size:12px;letter-spacing:.08em}
+.course-tabs{display:flex;gap:8px;justify-content:center}
+.tab{
+  border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;
+  cursor:pointer;color:var(--muted);font-weight:800;font-size:13px
+}
+.tab.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.progress-box{min-width:230px}
+.progress-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700}
+.progress{height:8px;background:#e9edf3;border-radius:999px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--yellow));border-radius:inherit;transition:.25s}
+.shell{width:min(1180px,calc(100% - 32px));margin:auto;padding:22px 0 56px}
+.welcome{
+  min-height:calc(100vh - 86px);display:grid;grid-template-columns:.95fr 1.05fr;gap:28px;align-items:center
+}
+.welcome-copy{padding:26px 0}
+.eyebrow{color:var(--orange);font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:clamp(42px,7vw,76px);line-height:.92;margin:12px 0 18px;letter-spacing:-.045em}
+.welcome p{font-size:18px;color:var(--muted);max-width:560px;line-height:1.55}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{
+  border:0;border-radius:8px;padding:12px 16px;font-weight:900;cursor:pointer;
+  background:var(--dark);color:#fff
+}
+.btn.secondary{background:#fff;color:var(--dark);border:1px solid var(--line)}
+.hero-wall{display:grid;grid-template-columns:1fr;gap:12px}
+.shot{position:relative;overflow:hidden;border-radius:8px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);aspect-ratio:16/9;padding:12px}
+.shot img{width:100%;height:100%;object-fit:contain;display:block}
+.shot.tall{aspect-ratio:16/9}
+.visual-note{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.visual-note div{border:1px solid var(--line);background:#fff;border-radius:8px;padding:14px;box-shadow:var(--shadow)}
+.visual-note strong{display:block;font-size:22px;margin-bottom:4px}
+.visual-note span{color:var(--muted);font-size:13px;font-weight:800}
+.section-title{margin:28px 0 12px;display:flex;align-items:end;justify-content:space-between;gap:18px}
+.section-title h2{font-size:30px;margin:0;letter-spacing:-.03em}
+.section-title p{margin:0;color:var(--muted);font-weight:700}
+.course-grid{display:grid;grid-template-columns:280px 1fr;gap:18px}
+.side{
+  position:sticky;top:78px;align-self:start;background:#fff;border:1px solid var(--line);
+  border-radius:8px;padding:10px;box-shadow:var(--shadow)
+}
+.side button{
+  width:100%;text-align:left;border:0;background:transparent;border-radius:8px;padding:10px;
+  cursor:pointer;font-weight:800;color:var(--muted);display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:center
+}
+.side button.active{background:#fff1e9;color:#9b3a12}
+.num{height:24px;border-radius:7px;background:#eef2f7;display:grid;place-items:center;font-size:12px}
+.side button.active .num{background:var(--orange);color:#fff}
+.blocks{display:grid;gap:18px}
+.block{
+  background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);
+  overflow:hidden;scroll-margin-top:92px
+}
+.block-top{display:grid;grid-template-columns:.92fr 1.08fr;min-height:360px}
+.visual{background:#f7f8fb;min-height:320px;position:relative;padding:16px;border-right:1px solid var(--line)}
+.visual img{width:100%;height:100%;object-fit:contain;display:block;border-radius:6px}
+.visual:after{display:none}
+.visual.clean-card{display:grid;place-items:center;background:linear-gradient(135deg,#111827,#252134);padding:22px}
+.pixel-card{width:100%;height:100%;min-height:280px;border:1px solid rgba(255,255,255,.12);border-radius:8px;display:grid;place-items:center;color:#fff;text-align:center;background:
+  linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),
+  linear-gradient(0deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:28px 28px}
+.pixel-card strong{display:block;font-size:42px;letter-spacing:-.04em;margin-bottom:10px}
+.pixel-card span{display:block;color:#ffb21c;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+.pixel-dots{display:flex;gap:7px;justify-content:center;margin-top:18px}
+.pixel-dots i{width:18px;height:18px;border-radius:5px;background:#ff6b35;display:block}.pixel-dots i:nth-child(2){background:#ffb21c}.pixel-dots i:nth-child(3){background:#6f4cff}.pixel-dots i:nth-child(4){background:#00a3a3}
+.content{padding:28px;display:flex;flex-direction:column;justify-content:center}
+.course-label{font-size:12px;font-weight:900;color:var(--orange);letter-spacing:.12em;text-transform:uppercase}
+.content h3{font-size:34px;line-height:1.02;letter-spacing:-.035em;margin:10px 0 12px}
+.memory{font-size:20px;line-height:1.35;margin:0 0 20px;color:#232734;font-weight:800}
+.cue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cue{border:1px solid var(--line);background:#f8fafc;border-radius:8px;padding:12px;min-height:82px}
+.cue strong{display:block;font-size:20px;line-height:1.05;margin-bottom:5px}
+.cue span{font-size:13px;color:var(--muted);font-weight:700}
+.quiz{border-top:1px solid var(--line);padding:18px 28px 22px;background:#fbfcfe}
+.quiz-head{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:12px}
+.quiz-head h4{margin:0;font-size:17px}
+.badge-mini{font-size:12px;font-weight:900;color:#9b3a12;background:#fff1e9;border-radius:999px;padding:6px 9px}
+.options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.option{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px;text-align:left;cursor:pointer;font-weight:800;color:#303644;min-height:64px}
+.option:hover{border-color:#ffb080;background:#fff8f4}
+.option.correct{border-color:#17a45b;background:#ebfff4}
+.option.wrong{border-color:#d14343;background:#fff1f1}
+.feedback{min-height:24px;margin-top:12px;font-weight:900}
+.feedback.good{color:#16834c}.feedback.bad{color:#bd3c3c}
+.completion{
+  margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);
+  padding:34px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center
+}
+.completion h2{margin:0 0 8px;font-size:30px;font-family:var(--font-body);font-weight:900;letter-spacing:0}
+.completion p{margin:0;color:var(--muted);font-weight:700;font-size:14px;line-height:1.45}
+.thanks{margin-top:16px;text-align:center;color:var(--muted);font-weight:900}
+.badge-stack{display:flex;gap:10px;flex-wrap:wrap}
+.score-card{padding:12px 14px;border-radius:8px;background:#f3f4f6;color:#667085;font-weight:900;border:1px solid var(--line);min-width:190px;text-align:center}
+.score-card.earned{background:#fff7dc;color:#92400e;border-color:#ffd36e}
+.score-card strong{display:block;font-size:18px;color:inherit}
+.score-card span{display:block;font-size:12px;color:inherit;margin-top:2px}
+.tracking-panel{
+  margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);
+  padding:30px;display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:start
+}
+.tracking-panel h2{margin:0 0 8px;font-size:38px}
+.tracking-panel p{margin:0;color:var(--muted);font-weight:700;line-height:1.55}
+.tracking-form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tracking-form label{display:grid;gap:6px;color:var(--ink);font-weight:900;font-size:13px}
+.tracking-form label.full{grid-column:1/-1}
+.tracking-form input,.tracking-form textarea{
+  width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 13px;font:700 14px/1.4 var(--font-body);
+  color:var(--ink);background:#fbfcfe;outline:none
+}
+.tracking-form textarea{min-height:96px;resize:vertical}
+.tracking-form input:focus,.tracking-form textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,94,46,.12)}
+.submit-row{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.submit-status{grid-column:1/-1;min-height:24px;font-weight:900;color:var(--muted)}
+.submit-status.good{color:#16834c}.submit-status.bad{color:#bd3c3c}
+.hidden{display:none}
+body{font-family:var(--font-body)}
+h1,.section-title h2,.content h3,.tracking-panel h2,.pixel-card strong{font-family:var(--font-title);letter-spacing:0;font-weight:400}
+h1{font-size:clamp(54px,8vw,92px)}
+.section-title h2{font-size:40px}.content h3{font-size:44px;line-height:.98}
+.mark,.tab,.progress-meta,.eyebrow,.visual-note strong,.hero-metrics strong,.hero-metrics span,.side button,.num,.pixel-card span,.course-label,.cue strong,.badge-mini,.feedback,.score-card strong,.score-card span,.thanks,.tracking-form label,.submit-status{font-family:var(--font-pixel)}
+.option{background:#1b1b1f;border:1px solid #3a3a40;border-radius:10px;padding:14px 16px;text-align:left;cursor:pointer;font-weight:700;color:#d7d7dc;min-height:76px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04);position:relative}
+.option::before{content:"Highlight";display:block;color:#fff;font-family:var(--font-pixel);font-size:13px;font-weight:900;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #3a3a40}
+.option:hover{border-color:#ffb080;background:#222127;color:#fff}
+.option:disabled{cursor:not-allowed;opacity:.82}
+.option.selected{border-color:#ffb21c;background:#202018;color:#fff;box-shadow:0 0 0 2px rgba(255,178,28,.12),inset 0 1px 0 rgba(255,255,255,.08)}
+.option.selected::before{content:"Selected";color:#ffb21c;border-bottom-color:rgba(255,178,28,.42)}
+.option.correct{border-color:#ffb21c;background:#202018;color:#fff;box-shadow:0 0 0 2px rgba(255,178,28,.18),inset 0 1px 0 rgba(255,255,255,.08)}
+.option.correct::before{content:"Correct Highlight";color:#ffb21c;border-bottom-color:rgba(255,178,28,.42)}
+.option.wrong{border-color:#d14343;background:#251b1d;color:#f1d7d7}
+.option.wrong::before{content:"Try Again";color:#ffb4b4;border-bottom-color:rgba(209,67,67,.42)}
+@media(max-width:940px){
+  .top-inner{grid-template-columns:1fr}.course-tabs{justify-content:flex-start;overflow:auto}.progress-box{min-width:0}
+  .welcome{grid-template-columns:1fr}.course-grid{grid-template-columns:1fr}.side{position:relative;top:auto}
+  .side{display:grid;grid-template-columns:repeat(2,1fr)}
+  .block-top{grid-template-columns:1fr}.visual{min-height:auto;aspect-ratio:16/9}.options,.cue-grid,.visual-note{grid-template-columns:1fr}
+  .completion,.tracking-panel{grid-template-columns:1fr}
+}
+@media(max-width:560px){.shell,.top-inner{width:min(100% - 20px,1180px)}.side{grid-template-columns:1fr}.content{padding:22px}.quiz{padding:18px 22px 22px}.hero-wall,.tracking-form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand"><div class="mark">DTR</div><span>Divoom Brand Learning</span></div>
+      <div class="course-tabs">
+        <button class="tab active" data-course="foundation">Course 1: Foundation</button>
+        <button class="tab" data-course="experience">Course 2: Experience</button>
+      </div>
+      <div class="progress-box">
+        <div class="progress-meta"><span id="progressLabel">Course progress</span><span id="progressNum">0/5</span></div>
+        <div class="progress"><span id="progressBar"></span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="welcome" id="welcome">
+      <div class="welcome-copy">
+        <h1>Learn the Brand. Experience the Pixel.</h1>
+        <p>Khám phá Divoom qua một hành trình học ngắn, giúp bạn nhận diện thương hiệu, ghi nhớ sản phẩm và tự tin tư vấn khách hàng.</p>
+        <div class="hero-actions">
+          <button class="btn" data-jump="block-1">Bắt đầu Course 1</button>
+          <button class="btn secondary" data-course="experience" data-jump="block-6">Xem Course 2</button>
+        </div>
+      </div>
+      <div class="hero-wall" aria-label="Divoom visual preview">
+        <div class="shot tall"><img src="elearning_assets_v2/where-sound-meets-pixel.png" alt="Where sound meets pixel art"></div>
+        <div class="visual-note">
+          <div><strong>2</strong><span>Courses</span></div>
+          <div><strong>10</strong><span>Blocks</span></div>
+          <div><strong>85%</strong><span>Nhận 1 Sao</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">
+      <div>
+        <h2 id="courseTitle">Course 1: Brand Foundation</h2>
+        <p id="courseSubtitle">5 blocks - Brand story, scale, trust, why Divoom, community.</p>
+      </div>
+    </div>
+
+    <section class="course-grid">
+      <nav class="side" id="sideNav"></nav>
+      <div class="blocks" id="blocks"></div>
+    </section>
+
+    <section class="completion">
+      <div>
+        <h2>Tiến độ theo Course</h2>
+        <p>Điểm đúng sẽ được ghi nhận sau khi học viên submit kết quả.</p>
+        <p>Sau phần Brand & DNA, bạn cần hoàn thành thêm Lineup Quiz riêng. Training chỉ được ghi nhận hoàn thành khi bạn hoàn tất cả hai phần.</p>
+      </div>
+      <div class="badge-stack">
+        <div id="scoreFoundation" class="score-card"><strong>0%</strong><span>Foundation</span></div>
+        <div id="scoreExperience" class="score-card"><strong>0%</strong><span>Experience</span></div>
+      </div>
+    </section>
+    <section class="tracking-panel">
+      <div>
+        <h2>Submit Learning Result</h2>
+        <p>Điền thông tin học viên, trả lời câu hỏi mở và gửi kết quả Brand & DNA về bảng theo dõi training.</p>
+      </div>
+      <form class="tracking-form" id="trackingForm">
+        <label>Họ tên
+          <input id="learnerName" name="learnerName" autocomplete="name" placeholder="Nguyễn Văn A" required>
+        </label>
+        <label>Email
+          <input id="learnerEmail" name="learnerEmail" type="email" autocomplete="email" placeholder="name@company.com" required>
+        </label>
+        <label>Mã số nhân viên
+          <input id="employeeId" name="employeeId" autocomplete="off" placeholder="VD: DTR00123" required>
+        </label>
+        <label class="full">Cửa hàng / Team
+          <input id="learnerStore" name="learnerStore" placeholder="Tên cửa hàng hoặc team">
+        </label>
+        <label class="full">Câu hỏi mở: Bạn sẽ giới thiệu Divoom trong 1 câu như thế nào?
+          <textarea id="openReflection" name="openReflection" placeholder="Ví dụ: Divoom là thương hiệu lifestyle kết hợp âm thanh, pixel art và cá nhân hóa..."></textarea>
+        </label>
+        <div class="submit-row">
+          <button class="btn" id="submitResult" type="button">Submit Result</button>
+          <button class="btn secondary" id="downloadResult" type="button">Tải bản kết quả</button>
+        </div>
+        <div class="submit-status" id="submitStatus"></div>
+      </form>
+    </section>
+    <div class="thanks">Thank you from DTR - Training Team</div>
+  </main>
+</div>
+
+<script>
+const TRACKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbxEiyut3-SMIV7evpVllt-V0ZgxEiOaNc0wzND-SI408CI5wFDNbfvnoqR4MMhX4WkRKw/exec";
+
+const courses = {
+  foundation: {
+    title: "Course 1: Brand Foundation",
+    subtitle: "5 blocks - Brand story, scale, trust, why Divoom, community.",
+    badge: "Foundation Star",
+    blocks: [
+      {
+        id:"block-1", image:"elearning_assets_v2/where-sound-meets-pixel.png", visualType:"image", label:"01 / Origin",
+        title:"Where Sound Meets Pixel Art",
+        memory:"Divoom là nơi âm thanh, nghệ thuật Pixel và thiết kế sáng tạo gặp nhau.",
+        cues:[["Audio","Nền tảng sản phẩm"],["Pixel Art","Ngôn ngữ nhận diện"],["Personal","Dấu ấn cá nhân"]],
+        q:"Divoom nên được nhớ như điều gì?", a:1,
+        options:["Một thương hiệu audio có thiết kế nổi bật","Một thương hiệu lifestyle kết hợp audio, pixel art và cá nhân hóa","Một thương hiệu thiết bị pixel dành cho góc làm việc"]
+      },
+      {
+        id:"block-2", image:"elearning_assets_v2/built-over-decade.png", visualType:"image", label:"02 / Journey",
+        title:"Built With Users",
+        memory:"Mỗi sản phẩm mới là kết quả của hơn 10 năm lắng nghe và cải tiến cùng cộng đồng.",
+        cues:[["2013","Bắt đầu hành trình"],["2021","Cộng đồng toàn cầu"],["2026+","Đồng sáng tạo"]],
+        q:"Ý chính của timeline này là gì?", a:2,
+        options:["Divoom mở rộng danh mục theo từng giai đoạn","Divoom phát triển cộng đồng trước khi mở rộng sản phẩm","Divoom phát triển liên tục cùng người dùng"]
+      },
+      {
+        id:"block-3", image:"elearning_assets_v2/global-proof.png", visualType:"image", label:"03 / Scale",
+        title:"Global Creative Hardware Brand",
+        memory:"Divoom có bằng chứng thương hiệu đủ mạnh: quốc gia, cửa hàng, người dùng, bằng sáng chế.",
+        cues:[["100+","Countries"],["4,000+","Stores"],["3M+","Users"]],
+        q:"Proof point nào giúp Divoom đáng tin hơn khi training sales?", a:0,
+        options:["Quy mô toàn cầu, có đội ngũ R&D giàu kinh nghiệm + Bằng sáng chế","Thiết kế sản phẩm có tính nhận diện cao","Cộng đồng sáng tạo tạo ra nhiều nội dung"]
+      },
+      {
+        id:"block-4", image:"elearning_assets_v2/why-divoom.png", visualType:"image", label:"04 / Why",
+        title:"Why Divoom?",
+        memory:"Divoom thắng bằng cảm xúc, lifestyle, hệ sinh thái sáng tạo, giftability và pixel innovation.",
+        cues:[["Emotion","Giá trị cảm xúc"],["Lifestyle","Góc sống cá tính"],["Gift","Dễ trở thành quà tặng"]],
+        q:"Khi nói 'Why Divoom', điểm nào quan trọng nhất?", a:1,
+        options:["Nhấn mạnh thiết kế nhỏ gọn và dễ trưng bày","Kết nối audio, light, app, community thành hệ sinh thái","Tập trung vào khả năng cá nhân hóa bằng app"]
+      },
+      {
+        id:"block-5", image:"elearning_assets_v2/community.png", visualType:"image", label:"05 / Community",
+        title:"Create. Share. Inspire.",
+        memory:"Cộng đồng là nguồn nội dung sống giúp Divoom khác biệt lâu dài.",
+        cues:[["3M+","Creative users"],["50M+","Pixel works"],["Global","Cùng sáng tạo"]],
+        q:"Community mang lại vai trò gì cho Divoom?", a:0,
+        options:["Tạo nguồn nội dung sáng tạo và cảm hứng liên tục","Giúp thương hiệu có thêm phản hồi để cải tiến sản phẩm","Là nơi người dùng chia sẻ cách trang trí góc làm việc"]
+      }
+    ]
+  },
+  experience: {
+    title: "Course 2: Brand Experience",
+    subtitle: "6 blocks - Brand DNA, pixel culture, product philosophy, technology, app ecosystem, final check.",
+    badge: "Experience Star",
+    blocks: [
+      {
+        id:"block-6", image:"", visualType:"card", visualTitle:"Brand DNA", visualKicker:"Hardcore tech - Stylish soul", label:"06 / DNA",
+        title:"Hardcore Tech, Stylish Experience",
+        memory:"Brand DNA của Divoom là công nghệ có cá tính, không phải phần cứng lạnh.",
+        cues:[["Tech","Hardcore"],["Light","Stylish"],["Soul","100% Divoom"]],
+        q:"Brand DNA của Divoom nên được hiểu thế nào?", a:2,
+        options:["Thiết bị âm thanh có ngôn ngữ thiết kế riêng","Sản phẩm trang trí kết hợp ánh sáng và app","Công nghệ âm thanh độc quyền bởi đội ngũ chuyên nghiệp + Đậm phong cách và cảm xúc"]
+      },
+      {
+        id:"block-7", image:"", visualType:"card", visualTitle:"Pixel Culture", visualKicker:"Create - Share - Inspire", label:"07 / Pixel Culture",
+        title:"Pixel Art Is the Language",
+        memory:"Pixel Art biến sản phẩm thành canvas cá nhân và kết nối người dùng với cộng đồng.",
+        cues:[["Create","Tự tạo"],["Share","Chia sẻ"],["Remix","Cập nhật liên tục"]],
+        q:"Pixel Art giúp Divoom khác biệt vì sao?", a:1,
+        options:["Vì làm thiết bị nổi bật hơn trên bàn làm việc","Vì biến thiết bị thành không gian sáng tạo cá nhân","Vì giúp app có thêm nhiều tính năng hiển thị"]
+      },
+      {
+        id:"block-8", image:"elearning_assets_v2/product-philosophy.png", visualType:"image", label:"08 / Philosophy",
+        title:"How Divoom Designs Products",
+        memory:"Ba trụ thiết kế: âm thanh tốt, light + sound tương tác, modern retro.",
+        cues:[["Audio","Powerful sound"],["Light + Sound","Interactive"],["Retro","Future nostalgia"]],
+        q:"Ba trụ thiết kế sản phẩm Divoom là gì?", a:0,
+        options:["Audio quality, light + sound, future meets nostalgia","Audio performance, app control, compact design","Pixel display, gift-ready design, daily utility"]
+      },
+      {
+        id:"block-9", image:"elearning_assets_v2/sound-tech.png", visualType:"image", label:"09 / Lifestyle",
+        title:"Beyond Listening",
+        memory:"Divoom không chỉ để nghe, mà để trưng bày, tặng quà và tạo trải nghiệm cảm xúc.",
+        cues:[["Gift Ready","Dễ tặng"],["Display","Đẹp khi đặt lên bàn"],["Emotion","Trải nghiệm hơn âm thanh"]],
+        q:"Lifestyle Value nên được nói với retail team như thế nào?", a:2,
+        options:["Divoom là thiết bị audio có ngoại hình khác biệt","Divoom là món quà công nghệ có tính trang trí","Divoom là vật phẩm lifestyle có thể nghe, nhìn, trưng bày và làm quà tặng"]
+      },
+      {
+        id:"block-10", image:"elearning_assets_v2/creative-platform.png", visualType:"image", label:"10 / Ecosystem",
+        title:"One App. Every Device.",
+        memory:"Divoom App kết nối thiết bị, nội dung, pixel art và daily tools thành một hệ sinh thái.",
+        cues:[["App","Điều khiển"],["Gallery","Nguồn nội dung"],["Tools","Daily utility"]],
+        q:"Vai trò của Divoom App là gì?", a:1,
+        options:["Điều khiển thiết bị và cập nhật một số tiện ích","Kết nối thiết bị, sáng tạo nội dung và cá nhân hóa","Quản lý hình ảnh pixel và các chế độ hiển thị"]
+      },
+      {
+        id:"block-11", image:"", visualType:"card", visualTitle:"Divoom Difference", visualKicker:"Final Check", label:"11 / Final Check",
+        title:"What Makes Divoom Different?",
+        memory:"Divoom khác biệt vì biến thiết bị công nghệ thành sản phẩm tinh thần: có thiết kế, sáng tạo, decor và giá trị quà tặng.",
+        cues:[["Design","Độc đáo + hoàn thiện"],["Create","Sáng tạo không giới hạn"],["Gift","Decor/quà tặng cá tính"]],
+        q:"Đâu là sự khác biệt của Divoom so với các dòng loa khác trên thị trường?", a:1,
+        options:["Divoom khác biệt chủ yếu nhờ âm thanh mạnh, thiết kế đẹp và app điều khiển tiện lợi","Thiết kế độc đáo, hoàn thiện chi tiết, sáng tạo không giới hạn và trở thành sản phẩm tinh thần để decor hoặc làm quà tặng cá tính","Divoom nổi bật nhờ pixel display, nhiều mẫu mã và khả năng trang trí góc làm việc"]
+      }
+    ]
+  }
+};
+
+let activeCourse = localStorage.getItem("divoomBrandDnaTrackingActiveCourseV2") || "foundation";
+let progress = JSON.parse(localStorage.getItem("divoomBrandDnaTrackingProgressV2") || "{}");
+if(!progress.foundation) progress.foundation = {};
+if(!progress.experience) progress.experience = {};
+
+const sideNav = document.getElementById("sideNav");
+const blocksEl = document.getElementById("blocks");
+const courseTitle = document.getElementById("courseTitle");
+const courseSubtitle = document.getElementById("courseSubtitle");
+const progressLabel = document.getElementById("progressLabel");
+const progressNum = document.getElementById("progressNum");
+const progressBar = document.getElementById("progressBar");
+const submitResult = document.getElementById("submitResult");
+const downloadResult = document.getElementById("downloadResult");
+const submitStatus = document.getElementById("submitStatus");
+
+function save(){
+  localStorage.setItem("divoomBrandDnaTrackingProgressV2", JSON.stringify(progress));
+  localStorage.setItem("divoomBrandDnaTrackingActiveCourseV2", activeCourse);
+}
+
+function quizRecord(courseKey, blockId){
+  const value = progress[courseKey][blockId];
+  if(value && typeof value === "object") return value;
+  if(value === true) return {state:"correct"};
+  if(value === "correct" || value === "wrong") return {state:value};
+  return {state:""};
+}
+
+function quizState(courseKey, blockId){
+  return quizRecord(courseKey, blockId).state || "";
+}
+
+function answeredCount(courseKey){
+  return courses[courseKey].blocks.filter(b => quizState(courseKey, b.id)).length;
+}
+
+function correctCount(courseKey){
+  return courses[courseKey].blocks.filter(b => quizState(courseKey, b.id) === "correct").length;
+}
+
+function scorePercent(courseKey){
+  return Math.round(correctCount(courseKey) / courses[courseKey].blocks.length * 100);
+}
+
+function answeredPercent(courseKey){
+  return Math.round(answeredCount(courseKey) / courses[courseKey].blocks.length * 100);
+}
+
+function updateProgress(){
+  const total = courses[activeCourse].blocks.length;
+  const done = answeredCount(activeCourse);
+  const progress = answeredPercent(activeCourse);
+  progressNum.textContent = `${done}/${total}`;
+  progressLabel.textContent = `${courses[activeCourse].title}`;
+  progressBar.style.width = `${progress}%`;
+  updateScoreCard("foundation", "scoreFoundation");
+  updateScoreCard("experience", "scoreExperience");
+}
+
+function updateScoreCard(courseKey, elementId){
+  const el = document.getElementById(elementId);
+  const done = answeredCount(courseKey);
+  const total = courses[courseKey].blocks.length;
+  el.className = done === total ? "score-card earned" : "score-card";
+  el.innerHTML = `<strong>${done}/${total}</strong><span>${done === total ? "Đã trả lời đủ" : "Đang làm"} - ${courseKey === "foundation" ? "Foundation" : "Experience"}</span>`;
+}
+
+function renderCourse(){
+  const course = courses[activeCourse];
+  courseTitle.textContent = course.title;
+  courseSubtitle.textContent = course.subtitle;
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.course === activeCourse));
+  sideNav.innerHTML = course.blocks.map((b, i) => `<button data-jump="${b.id}"><span class="num">${i+1}</span><span>${b.title}</span></button>`).join("");
+  blocksEl.innerHTML = course.blocks.map((b, i) => `
+    <article class="block" id="${b.id}">
+      <div class="block-top">
+        ${b.visualType === "card"
+          ? `<div class="visual clean-card"><div class="pixel-card"><div><span>${b.visualKicker}</span><strong>${b.visualTitle}</strong><div class="pixel-dots"><i></i><i></i><i></i><i></i></div></div></div></div>`
+          : `<div class="visual"><img src="${b.image}" alt="${b.title}"></div>`}
+        <div class="content">
+          <div class="course-label">${b.label}</div>
+          <h3>${b.title}</h3>
+          <p class="memory">${b.memory}</p>
+          <div class="cue-grid">${b.cues.map(c => `<div class="cue"><strong>${c[0]}</strong><span>${c[1]}</span></div>`).join("")}</div>
+        </div>
+      </div>
+      <div class="quiz" data-block="${b.id}">
+        <div class="quiz-head"><h4>${b.q}</h4><span class="badge-mini">${quizState(activeCourse, b.id) ? "Answered" : "Quick Quiz"}</span></div>
+        <div class="options">${b.options.map((o, oi) => `<button class="option ${quizRecord(activeCourse, b.id).selected === oi ? "selected" : ""}" data-answer="${oi}" ${quizState(activeCourse, b.id) ? "disabled" : ""}>${o}</button>`).join("")}</div>
+        <div class="feedback ${quizState(activeCourse, b.id) ? "good" : ""}">${quizState(activeCourse, b.id) ? "Đã ghi nhận câu trả lời. Bạn không thể thay đổi lựa chọn này." : ""}</div>
+      </div>
+    </article>
+  `).join("");
+  bind();
+  updateProgress();
+}
+
+function bind(){
+  document.querySelectorAll("[data-jump]").forEach(btn => {
+    btn.onclick = () => {
+      const target = document.getElementById(btn.dataset.jump);
+      if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
+    };
+  });
+  document.querySelectorAll(".quiz").forEach(q => {
+    const blockId = q.dataset.block;
+    const block = courses[activeCourse].blocks.find(b => b.id === blockId);
+    const opts = [...q.querySelectorAll(".option")];
+    const fb = q.querySelector(".feedback");
+    const mini = q.querySelector(".badge-mini");
+    opts.forEach(opt => {
+      opt.onclick = () => {
+        if(quizState(activeCourse, blockId)) return;
+        opts.forEach(o => o.classList.remove("correct","wrong"));
+        const selected = Number(opt.dataset.answer);
+        const ok = selected === block.a;
+        progress[activeCourse][blockId] = {
+          state: ok ? "correct" : "wrong",
+          selected,
+          selectedText: block.options[selected],
+          correctIndex: block.a,
+          correctText: block.options[block.a]
+        };
+        if(ok){
+          opt.classList.add("selected");
+          fb.textContent = "Đã ghi nhận câu trả lời. Bạn không thể thay đổi lựa chọn này.";
+          fb.className = "feedback good";
+          mini.textContent = "Answered";
+          save();
+          updateProgress();
+        } else {
+          opt.classList.add("selected");
+          fb.textContent = "Đã ghi nhận câu trả lời. Bạn không thể thay đổi lựa chọn này.";
+          fb.className = "feedback good";
+          mini.textContent = "Answered";
+          save();
+          updateProgress();
+        }
+        opts.forEach(o => o.disabled = true);
+      };
+    });
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        document.querySelectorAll(".side button").forEach(b => b.classList.toggle("active", b.dataset.jump === e.target.id));
+      }
+    });
+  }, {rootMargin:"-35% 0px -55% 0px"});
+  document.querySelectorAll(".block").forEach(b => obs.observe(b));
+}
+
+function allQuizItems(){
+  return Object.entries(courses).flatMap(([courseKey, course]) =>
+    course.blocks.map((block, index) => ({courseKey, courseTitle:course.title, block, number:index + 1}))
+  );
+}
+
+function totalCorrect(){
+  return Object.keys(courses).reduce((sum, key) => sum + correctCount(key), 0);
+}
+
+function totalQuestions(){
+  return Object.values(courses).reduce((sum, course) => sum + course.blocks.length, 0);
+}
+
+function allAnswered(){
+  return Object.keys(courses).every(courseKey => answeredCount(courseKey) === courses[courseKey].blocks.length);
+}
+
+function totalScorePercent(){
+  return Math.round(totalCorrect() / totalQuestions() * 100);
+}
+
+function buildTrackingPayload(){
+  const learnerName = document.getElementById("learnerName").value.trim();
+  const learnerEmail = document.getElementById("learnerEmail").value.trim();
+  const employeeId = document.getElementById("employeeId").value.trim();
+  const learnerStore = document.getElementById("learnerStore").value.trim();
+  const openReflection = document.getElementById("openReflection").value.trim();
+  return {
+    program: "Divoom E-learning - Brand & DNA",
+    module: "Brand_DNA",
+    targetSheet: "Tracking",
+    version: "Tracking Demo v1",
+    submittedAt: new Date().toISOString(),
+    learner: {name: learnerName, email: learnerEmail, employeeId, store: learnerStore},
+    scores: {
+      foundationPercent: scorePercent("foundation"),
+      experiencePercent: scorePercent("experience"),
+      totalCorrect: totalCorrect(),
+      totalQuestions: totalQuestions(),
+      totalPercent: totalScorePercent(),
+      foundationStar: scorePercent("foundation") >= 85,
+      experienceStar: scorePercent("experience") >= 85
+    },
+    answers: allQuizItems().map(item => {
+      const record = quizRecord(item.courseKey, item.block.id);
+      return {
+        course: item.courseTitle,
+        blockId: item.block.id,
+        question: item.block.q,
+        selectedAnswer: record.selectedText || "",
+        correctAnswer: item.block.options[item.block.a],
+        result: record.state || "unanswered"
+      };
+    }),
+    openResponse: openReflection
+  };
+}
+
+function setSubmitStatus(message, type){
+  submitStatus.textContent = message;
+  submitStatus.className = `submit-status ${type || ""}`.trim();
+}
+
+function validateTrackingForm(){
+  const name = document.getElementById("learnerName").value.trim();
+  const email = document.getElementById("learnerEmail").value.trim();
+  const employeeId = document.getElementById("employeeId").value.trim();
+  if(!name || !email || !employeeId){
+    setSubmitStatus("Vui lòng nhập họ tên, email và mã số nhân viên trước khi submit.", "bad");
+    return false;
+  }
+  return true;
+}
+
+function validateCompletion(){
+  if(!allAnswered()){
+    setSubmitStatus("Vui lòng hoàn thành toàn bộ câu hỏi trước khi submit hoặc tải kết quả.", "bad");
+    return false;
+  }
+  return true;
+}
+
+function escapeHtml(value){
+  return String(value || "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[char]));
+}
+
+function formatDate(value){
+  return new Date(value).toLocaleString("vi-VN", {dateStyle:"medium", timeStyle:"short"});
+}
+
+function renderResultReport(payload){
+  const stars = [
+    payload.scores.foundationStar ? "Foundation ★" : "Foundation",
+    payload.scores.experienceStar ? "Experience ★" : "Experience"
+  ].join(" · ");
+  const answerRows = payload.answers.map((answer, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${escapeHtml(answer.course)}</td>
+      <td>${escapeHtml(answer.question)}</td>
+      <td>${escapeHtml(answer.selectedAnswer || "Đã chọn đúng trong bản cũ")}</td>
+      <td>${escapeHtml(answer.result === "correct" ? "Đúng" : answer.result === "wrong" ? "Chưa đúng" : "Chưa trả lời")}</td>
+    </tr>
+  `).join("");
+  return `<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divoom Brand/DNA Result</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700;900&display=swap');
+body{margin:0;background:#f4f6f8;color:#141822;font-family:Roboto,Arial,sans-serif}.page{max-width:980px;margin:0 auto;padding:34px 22px 48px}.hero{background:#15161d;color:#fff;border-radius:14px;padding:30px;display:grid;gap:12px}.eyebrow{color:#ffb21c;font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:12px}h1{font-family:'Bebas Neue',Impact,sans-serif;font-size:58px;line-height:.9;margin:0;font-weight:400}.hero p{margin:0;color:#d8dbe2;font-weight:700}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.card{background:#fff;border:1px solid #dde2ea;border-radius:10px;padding:16px}.card strong{display:block;font-size:30px}.card span{color:#667085;font-weight:800;font-size:13px}.section{background:#fff;border:1px solid #dde2ea;border-radius:10px;padding:20px;margin-top:14px}h2{margin:0 0 12px;font-size:22px}.meta{display:grid;grid-template-columns:160px 1fr;gap:8px;font-weight:700}.meta b{color:#667085}table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #e6eaf0;padding:10px;text-align:left;vertical-align:top}th{background:#15161d;color:#fff}.note{white-space:pre-wrap;line-height:1.55}.footer{text-align:center;color:#667085;font-weight:900;margin-top:20px}@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.meta{grid-template-columns:1fr}h1{font-size:44px}}
+</style></head><body><main class="page">
+<section class="hero"><div class="eyebrow">Divoom E-learning Result</div><h1>Brand & DNA</h1><p>${escapeHtml(payload.learner.name)} · ${escapeHtml(payload.learner.email)} · ${formatDate(payload.submittedAt)}</p></section>
+<section class="grid"><div class="card"><strong>${payload.scores.totalPercent}%</strong><span>Total Score</span></div><div class="card"><strong>${payload.scores.totalCorrect}/${payload.scores.totalQuestions}</strong><span>Correct Answers</span></div><div class="card"><strong>${payload.scores.foundationPercent}%</strong><span>Foundation</span></div><div class="card"><strong>${payload.scores.experiencePercent}%</strong><span>Experience</span></div></section>
+<section class="section"><h2>Thông tin học viên</h2><div class="meta"><b>Họ tên</b><span>${escapeHtml(payload.learner.name)}</span><b>Email</b><span>${escapeHtml(payload.learner.email)}</span><b>Mã số nhân viên</b><span>${escapeHtml(payload.learner.employeeId)}</span><b>Cửa hàng / Team</b><span>${escapeHtml(payload.learner.store)}</span><b>Sao đạt được</b><span>${escapeHtml(stars)}</span></div></section>
+<section class="section"><h2>Câu trả lời mở</h2><div class="note">${escapeHtml(payload.openResponse || "Chưa nhập")}</div></section>
+<section class="section"><h2>Chi tiết đáp án</h2><table><thead><tr><th>#</th><th>Course</th><th>Câu hỏi</th><th>Đáp án đã chọn</th><th>Kết quả</th></tr></thead><tbody>${answerRows}</tbody></table></section>
+<div class="footer">DTR - Training Team</div></main></body></html>`;
+}
+
+function downloadPayload(payload){
+  const safeName = (payload.learner.name || "learner").replace(/[^a-z0-9_-]+/gi, "_");
+  const blob = new Blob([renderResultReport(payload)], {type:"text/html;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Divoom_Brand_DNA_Result_${safeName}.html`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function submitTrackingResult(){
+  if(!validateTrackingForm()) return;
+  if(!validateCompletion()) return;
+  const payload = buildTrackingPayload();
+  if(!TRACKING_ENDPOINT){
+    downloadPayload(payload);
+    setSubmitStatus("Demo mode: chưa gắn Google Sheet endpoint. File kết quả đã được tạo để kiểm tra format.", "good");
+    return;
+  }
+  submitResult.disabled = true;
+  setSubmitStatus("Đang gửi kết quả...", "");
+  try{
+    await fetch(TRACKING_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    setSubmitStatus("Đã gửi kết quả về bảng tracking.", "good");
+  } catch(error){
+    downloadPayload(payload);
+    setSubmitStatus("Chưa gửi được online. File backup kết quả đã được tạo.", "bad");
+  } finally {
+    submitResult.disabled = false;
+  }
+}
+
+document.querySelectorAll("[data-course]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeCourse = btn.dataset.course;
+    save();
+    renderCourse();
+    if(btn.dataset.jump){
+      setTimeout(() => document.getElementById(btn.dataset.jump)?.scrollIntoView({behavior:"smooth", block:"start"}), 50);
+    }
+  });
+});
+
+submitResult.addEventListener("click", submitTrackingResult);
+downloadResult.addEventListener("click", () => {
+  if(validateTrackingForm() && validateCompletion()) downloadPayload(buildTrackingPayload());
+});
+
+renderCourse();
+</script>
+</body>
+</html>

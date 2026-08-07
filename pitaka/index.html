@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Không gian đào tạo Pitaka đang được chuẩn bị.">
+<meta name="theme-color" content="#101217">
+<title>Pitaka · Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; --page:#101217; --surface:#191c23; --line:#303641; --text:#f5f6f8; --muted:#a6adbb; --accent:#ff7043; --accent-light:#ffb39c; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 28px;
+    background: radial-gradient(circle at 15% 10%, rgba(255,112,67,.1), transparent 28rem), var(--page);
+    color: var(--text);
+    font-family: "Outfit", sans-serif;
+  }
+  body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:32px 32px;
+    mask-image:linear-gradient(to bottom,black,transparent 80%);
+  }
+  main {
+    width: min(760px, 100%);
+    padding: clamp(30px, 7vw, 64px);
+    border: 1px solid var(--line);
+    border-radius: 12px 36px 12px 36px;
+    background: var(--surface);
+    box-shadow: 0 26px 70px rgba(3,5,10,.28), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .mark {
+    display:grid;
+    width:58px;
+    height:58px;
+    place-items:center;
+    border:1px solid #674035;
+    border-radius:8px 18px 8px 18px;
+    background:#34231f;
+    color:var(--accent-light);
+    font:600 1rem "IBM Plex Mono",monospace;
+  }
+  .status {
+    margin: 42px 0 12px;
+    color: var(--accent-light);
+    font: 600 .74rem "IBM Plex Mono", monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  h1 { margin:0; font-size:clamp(3rem,10vw,5.5rem); line-height:.92; letter-spacing:-.055em; }
+  p { max-width:560px; margin:22px 0 34px; color:var(--muted); font-size:1.1rem; line-height:1.6; }
+  a {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    min-height:48px;
+    padding:0 18px;
+    border:1px solid #674035;
+    border-radius:8px;
+    background:#34231f;
+    color:var(--accent-light);
+    font-weight:700;
+    text-decoration:none;
+    transition:transform 220ms cubic-bezier(.2,.8,.2,1),background-color 220ms cubic-bezier(.2,.8,.2,1);
+  }
+  a:hover { background:#412a24; transform:translateY(-3px); }
+  a:active { transform:translateY(0); }
+  a:focus-visible { outline:3px solid var(--accent-light); outline-offset:4px; }
+  a svg { width:18px; height:18px; transform:rotate(180deg); }
+  @media (prefers-reduced-motion:reduce) { * { transition-duration:.01ms !important; } }
+</style>
+</head>
+<body>
+  <main>
+    <span class="mark" aria-hidden="true">PK</span>
+    <p class="status">Pitaka · Coming soon</p>
+    <h1>Đang chuẩn bị.</h1>
+    <p>Nội dung đào tạo Pitaka đang được xây dựng. Các bài học và thử thách sẽ xuất hiện tại đây khi sẵn sàng.</p>
+    <a href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Quay lại danh sách brand</a>
+  </main>
+</body>
+</html>

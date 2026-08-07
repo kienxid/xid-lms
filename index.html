@@ -3,38 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Kho bài tập tương tác dành cho chương trình đào tạo Divoom.">
-<meta name="theme-color" content="#111318">
-<title>Divoom Learning Modules</title>
+<meta name="description" content="Không gian e-learning đa thương hiệu dành cho đội ngũ DTR.">
+<meta name="theme-color" content="#101217">
+<title>XID E-learning</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: dark;
-    --page: #111318;
+    --page: #101217;
     --surface: #191c23;
-    --surface-raised: #20242d;
+    --surface-hover: #20242d;
     --line: #303641;
     --text: #f5f6f8;
     --muted: #a6adbb;
     --accent: #ff7043;
-    --accent-soft: #34231f;
     --accent-light: #ffb39c;
-    --shadow: 0 22px 60px rgba(3, 5, 10, .28);
     --ease: cubic-bezier(.2, .8, .2, 1);
   }
 
   * { box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
 
   body {
     margin: 0;
     min-width: 320px;
     min-height: 100dvh;
     background:
-      radial-gradient(circle at 10% 0%, rgba(255, 112, 67, .11), transparent 28rem),
+      radial-gradient(circle at 8% 0%, rgba(255,112,67,.1), transparent 30rem),
       var(--page);
     color: var(--text);
     font-family: "Outfit", sans-serif;
@@ -52,10 +48,8 @@
       linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
     background-size: 32px 32px;
-    mask-image: linear-gradient(to bottom, black, transparent 72%);
+    mask-image: linear-gradient(to bottom, black, transparent 78%);
   }
-
-  a { color: inherit; }
 
   .skip-link {
     position: fixed;
@@ -76,20 +70,12 @@
   .page {
     width: min(1120px, calc(100% - 40px));
     margin: 0 auto;
-    padding: 72px 0 64px;
-  }
-
-  .hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 280px;
-    gap: 64px;
-    align-items: center;
-    padding-bottom: 64px;
+    padding: 72px 0 56px;
   }
 
   .eyebrow,
-  .section-label,
-  .module-kind {
+  .brand-meta,
+  footer {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
     letter-spacing: .08em;
@@ -100,7 +86,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 0 0 18px;
+    margin: 0 0 20px;
     color: var(--accent-light);
     font-size: .75rem;
   }
@@ -114,135 +100,82 @@
   }
 
   h1 {
-    max-width: 720px;
+    max-width: 780px;
     margin: 0;
-    font-size: clamp(3rem, 7vw, 5.4rem);
+    font-size: clamp(3rem, 7vw, 5.5rem);
     line-height: .94;
     letter-spacing: -.055em;
     text-wrap: balance;
   }
 
-  .hero-copy {
-    max-width: 590px;
+  .intro {
+    max-width: 620px;
     margin: 24px 0 0;
     color: var(--muted);
     font-size: clamp(1.05rem, 2vw, 1.2rem);
     text-wrap: pretty;
   }
 
-  .pixel-board {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    aspect-ratio: 1;
-    padding: 22px;
-    border: 1px solid var(--line);
-    border-radius: 28px 8px 28px 8px;
-    background: rgba(25, 28, 35, .9);
-    box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.05);
-    transform: rotate(2deg);
-  }
-
-  .pixel-board span {
-    border-radius: 3px;
-    background: #292e38;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
-  }
-
-  .pixel-board .on { background: var(--accent); }
-  .pixel-board .soft { background: #79402f; }
-
-  .track + .track { margin-top: 64px; }
-
-  .section-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 24px;
-    align-items: end;
-    margin-bottom: 22px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .section-label {
-    margin: 0 0 8px;
-    color: var(--accent-light);
-    font-size: .7rem;
-  }
-
-  h2 {
-    margin: 0;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    line-height: 1;
-    letter-spacing: -.035em;
-  }
-
-  .section-summary {
-    max-width: 390px;
-    margin: 0;
-    color: var(--muted);
-    text-align: right;
-  }
-
-  .module-grid {
+  .brand-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    gap: 18px;
+    margin-top: 64px;
   }
 
-  .module-card {
-    min-width: 0;
-    min-height: 270px;
-  }
+  .brand-card { min-width: 0; min-height: 390px; }
 
-  .module-card--wide { grid-column: 1 / -1; min-height: 240px; }
-
-  .module-link {
+  .brand-link {
     position: relative;
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 100%;
     overflow: hidden;
-    padding: 28px;
+    padding: 32px;
     border: 1px solid var(--line);
-    border-radius: 8px 24px 8px 24px;
+    border-radius: 10px 32px 10px 32px;
     background: var(--surface);
     color: var(--text);
     text-decoration: none;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
     transition: transform 240ms var(--ease), border-color 240ms var(--ease), background-color 240ms var(--ease), box-shadow 240ms var(--ease);
     touch-action: manipulation;
   }
 
-  .module-link::after {
+  .brand-link::after {
     content: "";
     position: absolute;
-    right: -20px;
-    bottom: -20px;
-    width: 112px;
-    height: 112px;
-    background-image: radial-gradient(circle, rgba(255,112,67,.2) 2px, transparent 2.5px);
-    background-size: 14px 14px;
+    right: -14px;
+    bottom: -14px;
+    width: 168px;
+    height: 168px;
+    background-image: radial-gradient(circle, rgba(255,112,67,.22) 2px, transparent 2.5px);
+    background-size: 16px 16px;
     opacity: .45;
     transition: transform 300ms var(--ease), opacity 240ms var(--ease);
   }
 
-  .module-link:hover {
+  .brand-link:hover {
     border-color: #6d4a40;
-    background: var(--surface-raised);
-    box-shadow: 0 18px 44px rgba(3, 5, 10, .2), inset 0 1px 0 rgba(255,255,255,.05);
-    transform: translateY(-5px);
+    background: var(--surface-hover);
+    box-shadow: 0 22px 54px rgba(3,5,10,.23), inset 0 1px 0 rgba(255,255,255,.06);
+    transform: translateY(-6px);
   }
 
-  .module-link:hover::after { opacity: .8; transform: translate(-8px, -8px); }
-  .module-link:active { transform: translateY(-1px) scale(.99); }
+  .brand-link:hover::after { opacity: .8; transform: translate(-8px, -8px); }
+  .brand-link:active { transform: translateY(-1px) scale(.99); }
 
-  .module-link:focus-visible {
+  .brand-link:focus-visible {
     outline: 3px solid var(--accent-light);
     outline-offset: 4px;
   }
 
-  .card-top,
+  .brand-card--soon .brand-link::after {
+    background-image: linear-gradient(135deg, rgba(255,255,255,.055) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.055) 50%, rgba(255,255,255,.055) 75%, transparent 75%);
+    background-size: 24px 24px;
+  }
+
+  .card-head,
   .card-action {
     position: relative;
     z-index: 1;
@@ -252,42 +185,45 @@
     gap: 16px;
   }
 
-  .module-icon {
+  .brand-mark {
     display: grid;
-    width: 48px;
-    height: 48px;
+    width: 58px;
+    height: 58px;
     place-items: center;
     border: 1px solid #674035;
-    border-radius: 6px 14px 6px 14px;
-    background: var(--accent-soft);
+    border-radius: 8px 18px 8px 18px;
+    background: #34231f;
     color: var(--accent-light);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
-  .module-icon svg { width: 24px; height: 24px; }
-
-  .module-kind {
-    color: var(--muted);
-    font-size: .68rem;
+  .brand-card--soon .brand-mark {
+    border-color: #424854;
+    background: #242832;
+    color: #c4cad4;
   }
 
-  .card-copy {
+  .brand-meta { color: var(--muted); font-size: .68rem; }
+
+  .brand-copy {
     position: relative;
     z-index: 1;
     align-self: end;
-    max-width: 530px;
-    padding: 34px 0 28px;
+    padding: 48px 0 38px;
   }
 
-  h3 {
+  h2 {
     margin: 0;
-    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
-    line-height: 1.1;
-    letter-spacing: -.025em;
-    text-wrap: balance;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: .95;
+    letter-spacing: -.045em;
   }
 
-  .card-copy p {
-    margin: 10px 0 0;
+  .brand-copy p {
+    max-width: 430px;
+    margin: 14px 0 0;
     color: var(--muted);
     text-wrap: pretty;
   }
@@ -299,13 +235,15 @@
     font-weight: 700;
   }
 
+  .brand-card--soon .card-action { color: #c4cad4; }
+
   .card-action svg {
     width: 18px;
     height: 18px;
     transition: transform 240ms var(--ease);
   }
 
-  .module-link:hover .card-action svg { transform: translateX(5px); }
+  .brand-link:hover .card-action svg { transform: translateX(5px); }
 
   footer {
     display: flex;
@@ -315,191 +253,66 @@
     padding-top: 24px;
     border-top: 1px solid var(--line);
     color: var(--muted);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: .72rem;
+    font-size: .7rem;
   }
 
   @media (max-width: 760px) {
-    .page { width: min(100% - 28px, 680px); padding: 48px 0 40px; }
-    .hero { grid-template-columns: 1fr; gap: 36px; padding-bottom: 48px; }
-    .pixel-board { width: min(220px, 64vw); justify-self: end; padding: 16px; border-radius: 22px 7px 22px 7px; }
-    .track + .track { margin-top: 48px; }
-    .section-head { grid-template-columns: 1fr; gap: 12px; }
-    .section-summary { text-align: left; }
-    .module-grid { grid-template-columns: 1fr; }
-    .module-card,
-    .module-card--wide { grid-column: auto; min-height: 250px; }
-    .module-link { padding: 24px; }
-    .card-copy { padding: 30px 0 24px; }
+    .page { width: min(100% - 28px, 640px); padding: 48px 0 40px; }
+    .brand-grid { grid-template-columns: 1fr; margin-top: 48px; }
+    .brand-card { min-height: 330px; }
+    .brand-link { padding: 26px; }
+    .brand-copy { padding: 40px 0 30px; }
     footer { flex-direction: column; gap: 6px; margin-top: 52px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
     *, *::before, *::after { transition-duration: .01ms !important; }
-    .pixel-board { transform: none; }
   }
 </style>
 </head>
 <body>
-  <a class="skip-link" href="#catalog">Đi đến danh sách bài học</a>
+  <a class="skip-link" href="#brands">Đi đến danh sách thương hiệu</a>
 
-  <main class="page" id="catalog">
-    <header class="hero">
-      <div>
-        <p class="eyebrow">DTR Training · Divoom</p>
-        <h1>Learn. Play.<br>Level up.</h1>
-        <p class="hero-copy">Khám phá 7 hoạt động tương tác để ôn kiến thức, luyện phản xạ và chinh phục các thử thách sản phẩm.</p>
-      </div>
-
-      <div class="pixel-board" aria-hidden="true">
-        <span></span><span></span><span class="on"></span><span></span><span></span>
-        <span></span><span class="on"></span><span class="on"></span><span class="soft"></span><span></span>
-        <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="soft"></span>
-        <span></span><span class="on"></span><span class="on"></span><span class="soft"></span><span></span>
-        <span></span><span></span><span class="on"></span><span></span><span></span>
-      </div>
+  <main class="page">
+    <header>
+      <p class="eyebrow">XID E-learning</p>
+      <h1>Choose a brand.<br>Start learning.</h1>
+      <p class="intro">Mỗi thương hiệu có một không gian đào tạo riêng. Chọn brand để mở bài học, quiz và các thử thách tương tác.</p>
     </header>
 
-    <section class="track" aria-labelledby="practice-quiz-heading">
-      <div class="section-head">
-        <div>
-          <p class="section-label">Ôn tập kiến thức</p>
-          <h2 id="practice-quiz-heading">Practice Quiz</h2>
-        </div>
-        <p class="section-summary">Kiểm tra hiểu biết về thương hiệu, dòng sản phẩm và khả năng nhận diện hình ảnh.</p>
-      </div>
+    <section class="brand-grid" id="brands" aria-label="Danh sách thương hiệu">
+      <article class="brand-card">
+        <a class="brand-link" href="divoom/" aria-label="Mở không gian đào tạo Divoom">
+          <div class="card-head">
+            <span class="brand-mark" aria-hidden="true">DV</span>
+            <span class="brand-meta">07 modules · Live</span>
+          </div>
+          <div class="brand-copy">
+            <h2>Divoom</h2>
+            <p>Brand DNA, product lineup, visual quiz và các game thử thách dành cho đội ngũ Divoom.</p>
+          </div>
+          <span class="card-action">Mở Divoom <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </article>
 
-      <div class="module-grid">
-        <article class="module-card module-card--wide">
-          <a class="card module-link" href="Divoom_Elearning_Brand_DNA_Tracking_v1/" aria-label="Mở bài Brand DNA Tracking">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3c0 5 8 5 8 10s-8 5-8 8M16 3c0 5-8 5-8 10s8 5 8 8M9.5 6h5M8.5 11h7M9.5 17h5"/></svg>
-              </span>
-              <span class="module-kind">Brand · Quiz</span>
-            </div>
-            <div class="card-copy">
-              <h3>Brand DNA Tracking</h3>
-              <p>Ôn lại nền tảng thương hiệu và những yếu tố tạo nên bản sắc Divoom.</p>
-            </div>
-            <span class="card-action">Bắt đầu bài học <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-
-        <article class="module-card">
-          <a class="card module-link" href="Divoom_Elearning_Lineup_Tracking_v1/" aria-label="Mở bài Lineup Tracking">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="15" width="7" height="5" rx="1"/></svg>
-              </span>
-              <span class="module-kind">Product · Quiz</span>
-            </div>
-            <div class="card-copy">
-              <h3>Lineup Tracking</h3>
-              <p>Nhận biết các dòng sản phẩm và ghi nhớ điểm nổi bật của từng thiết bị.</p>
-            </div>
-            <span class="card-action">Bắt đầu bài học <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-
-        <article class="module-card">
-          <a class="card module-link" href="Divoom_Product_Visual_Quiz_v2/" aria-label="Mở bài Product Visual Quiz">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
-              </span>
-              <span class="module-kind">Visual · Quiz</span>
-            </div>
-            <div class="card-copy">
-              <h3>Product Visual Quiz</h3>
-              <p>Luyện khả năng nhận diện sản phẩm Divoom qua hình ảnh thực tế.</p>
-            </div>
-            <span class="card-action">Bắt đầu bài học <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <section class="track" aria-labelledby="challenge-zone-heading">
-      <div class="section-head">
-        <div>
-          <p class="section-label">Chơi để ghi nhớ</p>
-          <h2 id="challenge-zone-heading">Challenge Zone</h2>
-        </div>
-        <p class="section-summary">Vận dụng kiến thức qua câu đố, ô chữ, lưới từ khóa và hành trình mê cung.</p>
-      </div>
-
-      <div class="module-grid">
-        <article class="module-card">
-          <a class="card module-link" href="pixel-grid-challenge/" aria-label="Mở thử thách Pixel Grid Challenge">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h5v5H3zM10 3h5v5h-5zM17 3h4v5h-4zM3 10h5v5H3zM10 10h5v5h-5zM17 10h4v5h-4zM3 17h5v4H3zM10 17h5v4h-5zM17 17h4v4h-4z"/></svg>
-              </span>
-              <span class="module-kind">15 câu · Tracking</span>
-            </div>
-            <div class="card-copy">
-              <h3>Pixel Grid Challenge</h3>
-              <p>Trả lời đúng để mở khóa từng mảnh và hoàn thiện bức tranh pixel.</p>
-            </div>
-            <span class="card-action">Vào thử thách <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-
-        <article class="module-card">
-          <a class="card module-link" href="crossword-challenge/" aria-label="Mở thử thách Crossword Challenge">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h6v6H4zM10 10h6v6h-6zM16 4h4v6h-4zM4 16h6v4H4zM16 16h4v4h-4z"/></svg>
-              </span>
-              <span class="module-kind">Ô chữ · Tracking</span>
-            </div>
-            <div class="card-copy">
-              <h3>Crossword Challenge</h3>
-              <p>Giải các keyword quan trọng và tìm ra Final Key của thương hiệu.</p>
-            </div>
-            <span class="card-action">Vào thử thách <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-
-        <article class="module-card">
-          <a class="card module-link" href="grid-puzzle/" aria-label="Mở thử thách Grid Puzzle">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4zM4 9h16M4 15h16M9 4v16M15 4v16"/><path d="m6 12 2 2 4-4" stroke-width="2"/></svg>
-              </span>
-              <span class="module-kind">Hidden words · Tracking</span>
-            </div>
-            <div class="card-copy">
-              <h3>Grid Puzzle</h3>
-              <p>Tìm từ khóa ẩn trong lưới và dùng gợi ý để hoàn thành thử thách.</p>
-            </div>
-            <span class="card-action">Vào thử thách <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-
-        <article class="module-card">
-          <a class="card module-link" href="pixel-maze-mission/" aria-label="Mở thử thách Pixel Maze Mission">
-            <div class="card-top">
-              <span class="module-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h6v4H8v4h4V8h4v4h4v8h-6v-4h-4v4H4z"/><path d="M17 4h3v3"/></svg>
-              </span>
-              <span class="module-kind">5 cửa · Tracking</span>
-            </div>
-            <div class="card-copy">
-              <h3>Pixel Maze Mission</h3>
-              <p>Chọn nhân vật, vượt mê cung và mở khóa 5 cửa sản phẩm.</p>
-            </div>
-            <span class="card-action">Vào thử thách <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </article>
-      </div>
+      <article class="brand-card brand-card--soon">
+        <a class="brand-link" href="pitaka/" aria-label="Xem thông tin Pitaka Coming Soon">
+          <div class="card-head">
+            <span class="brand-mark" aria-hidden="true">PK</span>
+            <span class="brand-meta">Coming soon</span>
+          </div>
+          <div class="brand-copy">
+            <h2>Pitaka</h2>
+            <p>Không gian đào tạo Pitaka đang được chuẩn bị và sẽ sớm có nội dung.</p>
+          </div>
+          <span class="card-action">Xem thông tin <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </article>
     </section>
 
     <footer>
       <span>DTR Training Team</span>
-      <span>07 interactive modules</span>
+      <span>02 brand spaces</span>
     </footer>
   </main>
 </body>
