@@ -1,7 +1,7 @@
 ---
 phase: 1
 title: "Static MAONO catalog and games"
-status: pending
+status: completed
 priority: P1
 dependencies: []
 ---
@@ -117,12 +117,12 @@ Sources remain under `/Users/kien/git/xid-lms/need_deploy/`; do not edit or dele
 
 ## Success criteria
 
-- [ ] Validator and `git diff --check` pass.
-- [ ] Root catalog has four brand spaces and all old links are unchanged.
-- [ ] MAONO catalog exposes exactly three working cards.
-- [ ] Each game loads without 404, missing image, or console error.
-- [ ] Back navigation and keyboard focus work.
-- [ ] No source ZIP, handoff screenshot, secret, or learner record is staged.
+- [x] Validator and `git diff --check` pass.
+- [x] Root catalog has four brand spaces and all old links are unchanged.
+- [x] MAONO catalog exposes exactly three working cards.
+- [x] Each game loads without 404, missing image, or console error.
+- [x] Back navigation and keyboard focus work.
+- [x] No source ZIP, handoff screenshot, secret, or learner record is staged.
 
 ## Risk assessment
 

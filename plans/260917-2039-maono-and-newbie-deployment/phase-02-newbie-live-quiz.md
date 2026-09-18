@@ -1,7 +1,7 @@
 ---
 phase: 2
 title: "Newbie LIVE Quiz port"
-status: pending
+status: completed
 priority: P1
 dependencies: []
 ---
@@ -18,11 +18,13 @@ dependencies: []
 
 Port the ChatGPT Sites/Vinext + Cloudflare D1 app into the existing CT114 `/opt/ddv-training` pnpm monorepo as a native Next.js standalone container with persistent SQLite and server-only Trainer authentication.
 
+Implementation uses `apps/newbie-quiz`, service/container `newbie-quiz` / `ddv-newbie-quiz`, and `/opt/ddv-training/data/newbie-quiz/newbie-quiz.sqlite`. Direct `better-sqlite3` transactions replaced the planned D1 compatibility adapter; this reduced migration surface while preserving server-authoritative scoring.
+
 ## Requirements
 
 - Preserve all 35 questions, timing, scoring, tie-break, leaderboard, learner, and `/host` flows.
 - Use CT114 host bind `10.10.10.114:8119`; container port `3119`.
-- Store data in `/opt/ddv-training/data/newbie-live-quiz/newbie-live-quiz.sqlite`.
+- Store data in `/opt/ddv-training/data/newbie-quiz/newbie-quiz.sqlite`.
 - Keep public learner PIN behavior unchanged. Treat Trainer key as a secret.
 - Never include Trainer key in client code, query strings, request JSON after login, logs, Git, or image layers.
 - Only the new service may restart during deployment.
@@ -177,13 +179,13 @@ Do not copy `/Users/kien/git/xid-lms/need_deploy/quiz-challenge-online/.openai/h
 
 ## Success criteria
 
-- [ ] No Vinext/Cloudflare runtime dependency remains in the new app.
-- [ ] Native Next standalone build succeeds on Node 22.
-- [ ] SQLite file persists under the dedicated host volume and passes `pragma integrity_check`.
-- [ ] Auth and concurrency tests pass.
-- [ ] Secret scan of `.next/static` and browser bundles finds no Trainer key.
-- [ ] Compose validates and builds only the new service.
-- [ ] Existing app files/config are unchanged except shared workspace, compose, env example, backup, and retention files listed above.
+- [x] No Vinext/Cloudflare runtime dependency remains in the new app.
+- [x] Native Next standalone build succeeds on Node 22.
+- [x] SQLite file persists under the dedicated host volume and passes `pragma integrity_check`.
+- [x] Auth, duplicate-submit, concurrency, and restart-persistence tests pass.
+- [x] Secret scan and public quiz payload check find no Trainer key or answer data.
+- [x] Compose validates and builds only the new service.
+- [x] Existing app files/config are unchanged except shared workspace, compose, env example, backup, and retention files listed above.
 
 ## Risk assessment
 

@@ -18,6 +18,13 @@ The public URL structure is:
 - `/<brand>/` — training catalog for one brand.
 - `/<brand>/<game>/` — one self-contained training game.
 
+Current MAONO paths:
+
+- `/maono/` — MAONO catalog.
+- `/maono/brand-learning/` — Brand Learning Practice Quiz.
+- `/maono/product-lineup/` — Product Lineup Practice Quiz.
+- `/maono/sound-lab/` — Sound Lab Challenge Zone.
+
 To publish a new training game:
 
 1. Add a folder containing its own `index.html` and assets under the correct brand folder.

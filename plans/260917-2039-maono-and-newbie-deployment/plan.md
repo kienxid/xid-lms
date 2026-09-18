@@ -36,9 +36,9 @@ Do not replace or redirect any existing public URL. Keep the ChatGPT Sites sourc
 
 | Phase | Name | Status | Depends on |
 |---|---|---|---|
-| 01 | [Static MAONO catalog and games](./phase-01-static-maono.md) | Pending | None |
-| 02 | [Newbie LIVE Quiz port](./phase-02-newbie-live-quiz.md) | Pending | None |
-| 03 | [Validate and deploy](./phase-03-validate-and-deploy.md) | Pending | 01, 02 |
+| 01 | [Static MAONO catalog and games](./phase-01-static-maono.md) | Completed | None |
+| 02 | [Newbie LIVE Quiz port](./phase-02-newbie-live-quiz.md) | Completed | None |
+| 03 | [Validate and deploy](./phase-03-validate-and-deploy.md) | In progress | 01, 02 |
 
 Phase 01 and Phase 02 may run in parallel. Phase 03 starts only after both pass local/build gates.
 
@@ -50,7 +50,7 @@ Phase 01 and Phase 02 may run in parallel. Phase 03 starts only after both pass 
 - Existing CT114 bindings stay unchanged: 8114 (LMS), 8117 (LIVE.QUIZ), 8118 (mophie). Newbie uses `10.10.10.114:8119` only.
 - CT100: `ssh -J xid-pve root@10.10.10.100`; nginx sites in `/etc/nginx/sites-available` and symlinks in `/etc/nginx/sites-enabled`.
 - Cloudflare DNS action must use the existing approved account/provider workflow. Discover current `live.xid.my` record first; never print or commit credentials.
-- Trainer key is generated and stored only in CT114 `/opt/ddv-training/deploy/.env` as `NEWBIE_LIVE_QUIZ_HOST_KEY`.
+- Trainer key is generated and stored only in CT114 `/opt/ddv-training/deploy/.env` as `NEWBIE_QUIZ_HOST_KEY`.
 
 ## Release invariants
 
@@ -75,9 +75,9 @@ Phase 01 and Phase 02 may run in parallel. Phase 03 starts only after both pass 
 ## Rollback boundary
 
 - Static: revert only the release commit, push the revert, wait for Pages.
-- Newbie app: disable only `newbie.xid.my` nginx site and stop only `newbie-live-quiz`; preserve its SQLite directory.
+- Newbie app: disable only `newbie.xid.my` nginx site and stop only `newbie-quiz`; preserve its SQLite directory.
 - Existing ChatGPT Sites URL remains the fallback and is not modified during this release.
 
 ## Unresolved questions
 
-None. DNS credential/provider location is a deployment-time discovery item, not an architectural decision.
+- DNS `newbie.xid.my` is owned by the user. SSL/public HTTPS verification waits for that record to resolve.
