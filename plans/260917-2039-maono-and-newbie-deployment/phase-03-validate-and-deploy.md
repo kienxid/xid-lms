@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Validate and deploy"
-status: in-progress
+status: completed
 priority: P1
 dependencies: [1, 2]
 ---
@@ -212,7 +212,7 @@ Local gates
 
 - [x] GitHub Pages workflow succeeded and all MAONO URLs return 200.
 - [x] Newbie container is healthy; database integrity is `ok`.
-- [ ] DNS resolves, HTTP redirects, certificate is valid, and learner/host pages return 200.
+- [x] DNS resolves, HTTP redirects, certificate is valid, and learner/host pages return 200.
 - [x] Full learner/Trainer round works at production origin and state survives container restart; public HTTPS retest remains after DNS/TLS.
 - [x] Unauthorized host action returns 403 without a valid Trainer cookie.
 - [x] Existing `lms`, `live`, `mophie`, and `elearning` URLs remain healthy.
@@ -243,4 +243,4 @@ No rollback step touches ports 8114/8117/8118, their containers, nginx sites, or
 
 ## Unresolved questions
 
-- DNS `newbie.xid.my` does not resolve as of 2026-09-18 08:25 +07. User is configuring Cloudflare; Certbot and public HTTPS E2E remain blocked until propagation.
+None.

@@ -1,7 +1,7 @@
 ---
 title: "MAONO and Newbie deployment status"
 date: 2026-09-18
-status: in-progress
+status: completed
 ---
 
 # MAONO and Newbie deployment status
@@ -13,7 +13,7 @@ status: in-progress
 | MAONO static | Complete | `983ba5e`; Pages run `35293895214`; 4/4 URLs HTTP 200 |
 | Newbie app | Complete | `4170666`; container healthy on CT114:8119 |
 | CT100 proxy | Complete | HTTP vhost enabled; nginx config valid; route/API smoke passed |
-| DNS/TLS | Waiting | `newbie.xid.my` does not resolve; user owns Cloudflare action |
+| DNS/TLS | Complete | DNS resolves; HTTP 301; HTTPS learner/host 200; Let’s Encrypt valid through 2026-12-17 |
 
 ## Delivered
 
@@ -40,12 +40,15 @@ status: in-progress
 | QR decode | `https://newbie.xid.my/` |
 | Online backup test | Pass |
 
-## Remaining
+## Final public checks
 
-1. Cloudflare: create proxied A record `newbie.xid.my` → `112.213.85.73`.
-2. After DNS resolves: run Certbot nginx flow on CT100.
-3. Verify public HTTP redirect, HTTPS `/`, `/host`, API 403, and certificate.
+- DNS A: `newbie.xid.my` → `112.213.85.73`.
+- HTTP: 301 to `https://newbie.xid.my/`.
+- HTTPS `/` and `/host`: 200.
+- Public quiz API: 35 questions.
+- Unauthenticated host control: 403.
+- Certificate: Let’s Encrypt `YE2`, expires 2026-12-17; automatic renewal scheduled.
 
 ## Unresolved questions
 
-- When will the Cloudflare record propagate?
+None.

@@ -1,7 +1,7 @@
 ---
 title: "MAONO and Newbie deployment"
 date: 2026-09-18
-status: in-progress
+status: completed
 ---
 
 # MAONO and Newbie deployment
@@ -15,7 +15,7 @@ Publish three MAONO static games and move Newbie All-Brand Quiz from temporary C
 - Published MAONO through commit `983ba5e`; Pages and 4 production URLs passed.
 - Ported Newbie to Next.js 16 + SQLite; pushed deployment commit `4170666`.
 - Built and started only `ddv-newbie-quiz`; existing LIVE.QUIZ and MOPHIE remained healthy.
-- Enabled CT100 HTTP proxy; public HTTPS waits for user-managed Cloudflare DNS.
+- Enabled CT100 proxy and Let’s Encrypt HTTPS after user-managed Cloudflare DNS resolved.
 - Verified 35-question flow, concurrent scoring, duplicate rejection, restart persistence, backup, QR target, and clean reset.
 
 ## Reflection
@@ -31,9 +31,9 @@ Host-side `sqlite3` created an empty root-owned database during an early smoke t
 
 ## Next
 
-1. Wait for `newbie.xid.my` to resolve to `112.213.85.73` through Cloudflare.
-2. Run Certbot on CT100 and verify public HTTPS endpoints.
+1. Share the Trainer key through the existing secure channel when the training owner is ready.
+2. Observe the first live session and keep the ChatGPT Sites fallback during the agreed window.
 
 ## Unresolved questions
 
-- Cloudflare DNS propagation time.
+None.

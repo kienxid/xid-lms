@@ -1,7 +1,7 @@
 ---
 title: "MAONO catalog and Newbie LIVE Quiz deployment"
 description: "Publish three MAONO static games and move the Newbie LIVE Quiz to CT114 with SQLite and server-side Trainer auth."
-status: in-progress
+status: completed
 priority: P1
 branch: main
 tags: [feature, frontend, backend, database, auth, infra]
@@ -38,7 +38,7 @@ Do not replace or redirect any existing public URL. Keep the ChatGPT Sites sourc
 |---|---|---|---|
 | 01 | [Static MAONO catalog and games](./phase-01-static-maono.md) | Completed | None |
 | 02 | [Newbie LIVE Quiz port](./phase-02-newbie-live-quiz.md) | Completed | None |
-| 03 | [Validate and deploy](./phase-03-validate-and-deploy.md) | In progress | 01, 02 |
+| 03 | [Validate and deploy](./phase-03-validate-and-deploy.md) | Completed | 01, 02 |
 
 Phase 01 and Phase 02 may run in parallel. Phase 03 starts only after both pass local/build gates.
 
@@ -80,4 +80,4 @@ Phase 01 and Phase 02 may run in parallel. Phase 03 starts only after both pass 
 
 ## Unresolved questions
 
-- DNS `newbie.xid.my` is owned by the user. SSL/public HTTPS verification waits for that record to resolve.
+None.
