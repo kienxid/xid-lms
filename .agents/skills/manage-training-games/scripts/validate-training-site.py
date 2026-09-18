@@ -12,7 +12,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ASSET_PATTERN = re.compile(
-    r'''["']([^"'\n]+/[^"'\n]+\.(?:css|gif|jpe?g|js|json|mp3|mp4|png|svg|ttf|wav|webp|woff2?))["']''',
+    r'''["']((?!data:|https?://)[^"'\n]{1,2048}/[^"'\n]{1,2048}\.(?:css|gif|jpe?g|js|json|mp3|mp4|png|svg|ttf|wav|webp|woff2?))["']''',
     re.IGNORECASE,
 )
 CSS_URL_PATTERN = re.compile(
@@ -91,6 +91,16 @@ def changed_published_urls(repo: Path) -> list[str]:
         capture_output=True,
         check=False,
     )
+    if result.returncode != 0:
+        detail = next(
+            (line.strip() for line in result.stderr.splitlines() if line.strip()),
+            "unknown Git error",
+        )
+        return [
+            f"unable to inspect published URL changes with git "
+            f"(exit {result.returncode}): {detail[:200]}"
+        ]
+
     errors: list[str] = []
     for line in result.stdout.splitlines():
         fields = line.split("\t")

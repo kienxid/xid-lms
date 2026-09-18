@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Không gian đào tạo MAONO dành cho đội ngũ dealer.">
+<meta name="theme-color" content="#111318">
+<title>MAONO Learning Modules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #111318;
+    --surface: #191c23;
+    --surface-raised: #20242d;
+    --line: #303641;
+    --text: #f5f6f8;
+    --muted: #a6adbb;
+    --accent: #ff7043;
+    --accent-soft: #34231f;
+    --accent-light: #ffb39c;
+    --shadow: 0 22px 60px rgba(3, 5, 10, .28);
+    --ease: cubic-bezier(.2, .8, .2, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100dvh;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(255, 112, 67, .11), transparent 28rem),
+      var(--page);
+    color: var(--text);
+    font-family: "Outfit", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, black, transparent 72%);
+  }
+
+  a { color: inherit; }
+
+  .brand-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 34px;
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 180ms var(--ease), transform 180ms var(--ease);
+  }
+
+  .brand-nav:hover { color: var(--accent-light); transform: translateX(-3px); }
+  .brand-nav:focus-visible { outline: 3px solid var(--accent-light); outline-offset: 4px; }
+
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--text);
+    color: var(--page);
+    font-weight: 700;
+    transform: translateY(-160%);
+    transition: transform 180ms var(--ease);
+  }
+
+  .skip-link:focus { transform: translateY(0); }
+
+  .page {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 72px 0 64px;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 64px;
+    align-items: center;
+    padding-bottom: 64px;
+  }
+
+  .eyebrow,
+  .section-label,
+  .module-kind {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    color: var(--accent-light);
+    font-size: .75rem;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    box-shadow: 6px 6px 0 var(--accent-light);
+  }
+
+  h1 {
+    max-width: 720px;
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 5.4rem);
+    line-height: .94;
+    letter-spacing: -.055em;
+    text-wrap: balance;
+  }
+
+  .hero-copy {
+    max-width: 590px;
+    margin: 24px 0 0;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    text-wrap: pretty;
+  }
+
+
+
+
+  .track + .track { margin-top: 64px; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-label {
+    margin: 0 0 8px;
+    color: var(--accent-light);
+    font-size: .7rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -.035em;
+  }
+
+  .section-summary {
+    max-width: 390px;
+    margin: 0;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .module-card {
+    min-width: 0;
+    min-height: 270px;
+  }
+
+  .module-card--wide { grid-column: 1 / -1; min-height: 240px; }
+
+  .module-link {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    overflow: hidden;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 8px 24px 8px 24px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    transition: transform 240ms var(--ease), border-color 240ms var(--ease), background-color 240ms var(--ease), box-shadow 240ms var(--ease);
+    touch-action: manipulation;
+  }
+
+  .module-link::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: 112px;
+    height: 112px;
+    background-image: radial-gradient(circle, rgba(255,112,67,.2) 2px, transparent 2.5px);
+    background-size: 14px 14px;
+    opacity: .45;
+    transition: transform 300ms var(--ease), opacity 240ms var(--ease);
+  }
+
+  .module-link:hover {
+    border-color: #6d4a40;
+    background: var(--surface-raised);
+    box-shadow: 0 18px 44px rgba(3, 5, 10, .2), inset 0 1px 0 rgba(255,255,255,.05);
+    transform: translateY(-5px);
+  }
+
+  .module-link:hover::after { opacity: .8; transform: translate(-8px, -8px); }
+  .module-link:active { transform: translateY(-1px) scale(.99); }
+
+  .module-link:focus-visible {
+    outline: 3px solid var(--accent-light);
+    outline-offset: 4px;
+  }
+
+  .card-top,
+  .card-action {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .module-icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid #674035;
+    border-radius: 6px 14px 6px 14px;
+    background: var(--accent-soft);
+    color: var(--accent-light);
+  }
+
+  .module-icon svg { width: 24px; height: 24px; }
+
+  .module-kind {
+    color: var(--muted);
+    font-size: .68rem;
+  }
+
+  .card-copy {
+    position: relative;
+    z-index: 1;
+    align-self: end;
+    max-width: 530px;
+    padding: 34px 0 28px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    line-height: 1.1;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+  }
+
+  .card-copy p {
+    margin: 10px 0 0;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  .card-action {
+    width: fit-content;
+    min-height: 44px;
+    color: var(--accent-light);
+    font-weight: 700;
+  }
+
+  .card-action svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 240ms var(--ease);
+  }
+
+  .module-link:hover .card-action svg { transform: translateX(5px); }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+  }
+
+  @media (max-width: 760px) {
+    .page { width: min(100% - 28px, 680px); padding: 48px 0 40px; }
+    .hero { grid-template-columns: 1fr; gap: 36px; padding-bottom: 48px; }
+    .track + .track { margin-top: 48px; }
+    .section-head { grid-template-columns: 1fr; gap: 12px; }
+    .section-summary { text-align: left; }
+    .module-grid { grid-template-columns: 1fr; }
+    .module-card,
+    .module-card--wide { grid-column: auto; min-height: 250px; }
+    .module-link { padding: 24px; }
+    .card-copy { padding: 30px 0 24px; }
+    footer { flex-direction: column; gap: 6px; margin-top: 52px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+  <main class="page" id="catalog">
+    <a class="brand-nav" href="../" aria-label="Quay lại danh sách thương hiệu">← Tất cả thương hiệu</a>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">DTR Training · MAONO</p>
+        <h1>Hear it.<br>Know it.</h1>
+        <p class="hero-copy">Ôn Brand DNA, nắm product lineup và luyện kỹ năng nhận diện âm thanh trước khi tư vấn giải pháp MAONO.</p>
+      </div>
+    </header>
+
+    <section class="track" aria-labelledby="self-study-heading">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Practice Zone</p>
+          <h2 id="self-study-heading">MAONO Training</h2>
+        </div>
+        <p class="section-summary">Ba bài thực hành độc lập giúp củng cố kiến thức thương hiệu, sản phẩm và trải nghiệm âm thanh.</p>
+      </div>
+
+      <div class="module-grid">
+        <article class="module-card">
+          <a class="card module-link" href="brand-learning/" aria-label="Mở MAONO Brand Learning Practice Quiz">
+            <div class="card-top">
+              <span class="module-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg>
+              </span>
+              <span class="module-kind">Brand · Quiz</span>
+            </div>
+            <div class="card-copy">
+              <h3>Brand Learning Practice Quiz</h3>
+              <p>Ôn Brand DNA, định vị thương hiệu và các nguyên tắc tư vấn cốt lõi của MAONO.</p>
+            </div>
+            <span class="card-action">Bắt đầu quiz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </article>
+
+        <article class="module-card">
+          <a class="card module-link" href="product-lineup/" aria-label="Mở MAONO Product Lineup Practice Quiz">
+            <div class="card-top">
+              <span class="module-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M6 3h12l2 4v13H4V7l2-4Zm3 8h6"/></svg>
+              </span>
+              <span class="module-kind">Product · Quiz</span>
+            </div>
+            <div class="card-copy">
+              <h3>Product Lineup Practice Quiz</h3>
+              <p>Luyện nhận diện dòng sản phẩm, chọn đúng model và ghép giải pháp theo nhu cầu khách hàng.</p>
+            </div>
+            <span class="card-action">Bắt đầu quiz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </article>
+
+        <article class="module-card module-card--wide">
+          <a class="card module-link" href="sound-lab/" aria-label="Mở MAONO Sound Lab Challenge Zone">
+            <div class="card-top">
+              <span class="module-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h2l2-6 4 12 3-9 2 6h3"/></svg>
+              </span>
+              <span class="module-kind">Sound · Challenge</span>
+            </div>
+            <div class="card-copy">
+              <h3>Sound Lab Challenge Zone</h3>
+              <p>Thử thách kỹ năng nghe, so sánh chất âm và vận dụng kiến thức MAONO qua các trạm tương tác.</p>
+            </div>
+            <span class="card-action">Vào Sound Lab <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <span>DTR Training Team</span>
+      <span>03 practice modules</span>
+    </footer>
+  </main>
+</body>
+</html>
