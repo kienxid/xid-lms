@@ -34,6 +34,21 @@ To publish a new training game:
 
 To add a brand, create its top-level folder and catalog, then add one brand card to the root `index.html`. A brand catalog may display Coming Soon before it has games.
 
+## Nomad server application
+
+The Nomad catalog at `/nomad/` links to `https://nomad-elearning.xid.my/`.
+Unlike the static games, this module stores learner attempts through a backend:
+Next.js + SQLite on CT114, deployed from `kienxid/xid-ddv-training` as service
+`nomad-elearning` in `/opt/ddv-training`. CT100 proxies HTTPS to `10.10.10.114:8120`.
+
+Trainer export is at `https://nomad-elearning.xid.my/admin`, protected by a server
+key. Persistent data is `/opt/ddv-training/data/nomad-elearning/nomad-elearning.sqlite`,
+covered by the stack's online backup script. The supplied release had no D1 data
+export; historical records remain in the original Cloudflare deployment.
+
+Updating the catalog through Pages does not redeploy the Nomad backend. Follow
+`apps/nomad-elearning/README.md` in the application repository for runtime updates.
+
 ## Codex workflow
 
 Open this repository in Codex and describe the change in plain language. Codex automatically follows `AGENTS.md` and the repo-local `manage-training-games` skill.

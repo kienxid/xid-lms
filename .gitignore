@@ -1,3 +1,4 @@
 *.zip
 .DS_Store
 need_deploy/
+Nomad-to-deploy/
